@@ -36,4 +36,9 @@ Export the `XDG_CURRENT_DESKTOP` or `DESKTOP_SESSION` environment variables with
 
 ## Other
 
-InsprWall uses components of [WeatherDesk](https://gitlab.com/bharadwaj-raju/WeatherDesk) by [Bharadwaj Raju](https://gitlab.com/bharadwaj-raju), which is licensed under the GNU General Public License v3.0.
+InsprWall makes use of the following open source software:
+- [Python](https://www.python.org/) by Guido van Rossum (Python Software Foundation License, Version 2 (Python-2.0))
+- [DiskCache](http://www.grantjenks.com/docs/diskcache/) by Grant Jenks (Apache License, Version 2.0)
+- [screeninfo](https://github.com/rr-/screeninfo) by Marcin Kurczewski (MIT License)
+- [requests](http://docs.python-requests.org/en/master/) by Kenneth Reitz (Apache License, Version 2.0)
+- [WeatherDesk](https://gitlab.com/bharadwaj-raju/WeatherDesk) by Bharadwaj Raju (GNU General Public License v3.0)

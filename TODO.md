@@ -5,6 +5,6 @@
 - [ ] toggle for quotes
 - [ ] some sort of install script or such
 - [ ] check resolution on cache images if enough people complain
-- [ ] PEP8 and such
-- [ ] semver and changelog
+- [x] PEP8 and such
+- [x] ~~semver and~~ changelog
 - [ ] proper list of dependencies
