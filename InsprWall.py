@@ -13,7 +13,7 @@ import requests
 from Desktop import get_desktop_environment, set_wallpaper
 
 NAME = "InsprWall"
-VERSION = "1"
+VERSION = "2"
 
 if "APPDATA" in os.environ:
     CONFIG_FILE = os.path.join(os.environ["APPDATA"], NAME)
@@ -84,9 +84,9 @@ def main():
         valid_sizes = "{w}x{h} {w}X{h} {w}×{h} {w}×{h} [{h}p]".format(
             w=width, h=height).split(" ")
         if CONFIG.getboolean("Display", "2k"):
-            valid_sizes.extend("[2k]", "[2K]")
+            valid_sizes.extend(["[2k]", "[2K]"])
         if CONFIG.getboolean("Display", "4k"):
-            valid_sizes.extend("[4k]", "[4K]")
+            valid_sizes.extend(["[4k]", "[4K]"])
         log("Valid sizes: {sizes}".format(sizes=valid_sizes))
 
         for post in req_reddit.json()["data"]["children"]:
