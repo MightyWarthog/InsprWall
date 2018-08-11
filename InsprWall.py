@@ -3,6 +3,7 @@
 from configparser import ConfigParser
 import os
 from random import choice
+import re
 from uuid import uuid4
 
 #from bs4 import BeautifulSoup
@@ -13,7 +14,7 @@ import requests
 from Desktop import get_desktop_environment, set_wallpaper
 
 NAME = "InsprWall"
-VERSION = "3"
+VERSION = "4"
 
 if "APPDATA" in os.environ:
     CONFIG_FILE = os.path.join(os.environ["APPDATA"], NAME)
@@ -79,21 +80,13 @@ def main():
         req_reddit = requests.get("http://www.reddit.com/r/{sub}.json?sort={sort}&t={time}&include_over_18={nsfw}".format(
             **reddit_prefs), headers={"user-agent": "python3:{name}:{vers} (by /u/owenthewizard)".format(name=NAME, vers=VERSION)})
 
-        # × is the unicode multiplication sign
-        # don't ask
-        valid_sizes = "{w}x{h} {w}X{h} {w}×{h} {w}×{h} [{h}p]".format(
-            w=width, h=height).split(" ")
-        if CONFIG.getboolean("Display", "2k"):
-            valid_sizes.extend(["[2k]", "[2K]"])
-        if CONFIG.getboolean("Display", "4k"):
-            valid_sizes.extend(["[4k]", "[4K]"])
-        log("Valid sizes: {sizes}".format(sizes=valid_sizes))
+        valid_sizes = re.compile("({w}\s?.\s?{h}|\[{h}p\]{twok}{fourk})".format(w=width, h=height, twok="|\[2[kK]\]" if CONFIG.getboolean("Display", "2k") else "", fourk="|\[4[kK]\]" if CONFIG.getboolean("Display", "4k") else ""))
 
         valid_formats = {f for f in CONFIG.get("Other", "formats").split("+")}
         log("Valid formats: {formats}".format(formats=valid_formats))
 
         for post in req_reddit.json()["data"]["children"]:
-            if any(size in post["data"]["title"] for size in valid_sizes):
+            if valid_sizes.search(post["data"]["title"]):
                 log('Matched post "{title}"'.format(
                     title=post["data"]["title"]))
                 image_format = post["data"]["url"][::-1].split(".")[0][::-1]

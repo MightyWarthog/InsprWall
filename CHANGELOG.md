@@ -7,6 +7,10 @@ This project does **NOT** adhere to [Semantic Versioning](http://semver.org/spec
 ## [Unreleased]
 - Draw the [BrainyQuote](https://www.brainyquote.com/) quote of the day.
 
+## [4] - 2018-08-11
+### Changed
+- Match image sizes with regex
+
 ## [3] - 2018-07-14
 ### Added
 - Added basic image format check
